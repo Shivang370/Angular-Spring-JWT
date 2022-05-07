@@ -1,0 +1,16 @@
+.example-spacer{
+    flex: 1 1 auto;
+}
+
+.visible {
+    visibility: initial !important;
+}
+
+.display {
+    display: block !important;
+    right: 10px;
+} 
+
+.btn-check:focus+.btn-primary, .btn-primary:focus{
+    box-shadow: none;
+}

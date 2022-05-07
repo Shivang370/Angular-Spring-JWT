@@ -1,0 +1,49 @@
+
+<div class="edit-modal"
+style="position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);min-width: 350px;min-height: 220px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 25px;z-index: 44;display: flex;flex-direction: column;justify-content: space-around;align-items: center;padding-top: 10px;background-color: white;">
+<div style="width: 100%;display: flex;flex-direction: row-reverse;margin: 0;">
+    <mat-icon (click)="close()" style="color: #DB4C3F;">cancel</mat-icon>
+</div>
+<span style="margin-bottom: 12px;">Name: <input [(ngModel)]="editName" name="editName"></span>
+<span style="margin-bottom: 12px;">Email: <input [(ngModel)]="editEmail" name="editEmail"></span>
+<span>Contact: <input [(ngModel)]="editContact" name="editContact" >  </span>
+
+<div style="margin-top: 15px;" class="primary-btn text-center">
+    <a (click)="submitForm()"  class="btn btn-primary submit">Update User</a>
+</div>
+</div>
+
+
+<div style="width: 100%;" style="margin-top: 30px;">
+    <table style="padding: 15px;width:80%; position: relative; margin-left: auto; margin-right: auto;" class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users;">
+            <th scope="row">{{user.id+" "}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.contact}}</td>
+            <div style="display: flex;">
+                <div class="primary-btn" style="margin-right: 15px;">
+                    <mat-icon (click)="deleteUser(user.id)" style="color: red;">
+                        delete_forever</mat-icon>
+                </div>
+                <div class="primary-btn">
+                    <mat-icon (click)="editUser(user.id)" style="color: black;">
+                        border_color</mat-icon>
+                </div>
+            </div>
+        </tr>
+    </tbody>
+</table>
+<div class="container text-center mt">
+    <button mat-raised-button (click)="registerpage()" color="primary">Add User</button>
+</div>
+</div>

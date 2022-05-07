@@ -1,0 +1,33 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="container text-center">
+                    <img class="img-fluid"
+                         style="width:100px" 
+                         src="/assets/password.png"/>
+                </div>
+            <h1 class="text-center">Login Here</h1>
+                <form [formGroup]="loginform">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <img src="/assets/user_icon.png"/>
+                        <input type="text" class="form-control" formControlName="username" placeholder="Username" appearance="Outline"/>
+                        <span *ngIf="username?.invalid && username?.touched" class="error"> Username is Invalid</span>
+                         </div>
+                        <br/>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <img src="/assets/unlock.png"/>
+                        <input type="password" class="form-control" id="currpassword" formControlName="password" placeholder="Password" appearance="Outline" pattern="^.*(?=.{8})(?=.*\d)(?=.*[a-zA-Z]).*$"/>
+                        <a class="eye-icon show" (click)="showPassword('current')"><img [src]='showCurrentPassword ? "/assets/hide_password.svg" : "/assets/show_password.svg"' (click)="toggleCurrentPassword()"></a>
+                        <span *ngIf="password?.invalid && password?.touched" class="error"> Password is Invalid </span>
+                    </div>
+                    <div class="container text-center mt">
+                    <button (click)="onSubmit()" type="submit" [disabled]="loginform.invalid" class="btn btn-primary">Login</button>
+                </div>
+                </form>
+           </div>
+        </div>
+    </div>
+</div>

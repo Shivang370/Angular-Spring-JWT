@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<mat-toolbar color="primary">
+    <span routerLink="/" style="background-color: transparent;"><i class="fa fa-fw fa-home"></i>
+        <button style="background-color: transparent;border: none;color: white;font-size: 15px;">Home</button></span>
+
+    <span class="example-spacer"></span>
+
+    <span *ngIf="!loggedIn" routerLink="/login" style="background-color: transparent;"><i class="fa fa-fw fa-user"></i>
+        <button style="background-color: transparent;border: none;color: white;font-size: 15px;">Login</button></span>
+    
+    <div (click)="handleDropDown()" *ngIf="loggedIn" class="dropdown"><i class="fa fa-fw fa-user"></i>
+        <button class="btn btn-primary dropdown-toggle"  style="background-color: transparent;border: none;" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{userDisplayName}}
+        </button>
+        <div class="dropdown-menu" [ngClass]="menuDisplay?'display':''" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button" (click)="changepassword()" style="color: royalblue;font-size: 15px;">Change-Password</button>
+            <button class="dropdown-item" type="button" (click)="logoutUser()" style="color: royalblue;font-size: 15px;">Logout</button>
+            
+        </div>
+    </div>
+
+</mat-toolbar>
