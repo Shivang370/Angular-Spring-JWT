@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -19,7 +20,7 @@ export class NavBarComponent implements OnInit {
 
   menuDisplay:boolean  = false;
 
-  constructor(private loginService:LoginService,private http:HttpClient,private cookieService:CookieService,private router:Router) { }
+  constructor(private loginService:LoginService,private http:HttpClient,private cookieService:CookieService,private router:Router,public socialAuthServive: SocialAuthService) { }
 
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class NavBarComponent implements OnInit {
   logoutUser()
   {
     this.loginService.Logout()
+    this.socialAuthServive.signOut()
     location.reload()
   }
 

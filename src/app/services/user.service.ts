@@ -55,7 +55,7 @@ export class UserService {
       return this.http.delete<void>(`${this.baseurl}/deleteUser/${id}`,{headers:options.headers});
     }
 
-    public resetpassword(req:any)
+    public changepassword(req:any)
     {
       let options: any ={};
       options.headers = new HttpHeaders();
@@ -69,4 +69,33 @@ export class UserService {
 
       return this.http.post(this.baseurl+"/changepassword",req,options);
   }
+
+  public sendEmail(req:any)
+  {
+      return this.http.post(this.baseurl+"/sendemail",req);
+  }
+
+  public verifyotp(req:any)
+  {
+    console.log(req);
+    
+    let options: any ={};
+      options.headers = new HttpHeaders();
+      let email=this.cookieService.get("email");
+      console.log(email);
+      options.headers = options.headers.append("email",email);
+
+    return this.http.post(this.baseurl+"/verifyotp",req,options);
+  }
+
+  public resetpassword(req:any)
+  {
+    let options: any ={};
+    options.headers = new HttpHeaders();
+    let email=this.cookieService.get("email");
+    console.log(email);
+    options.headers = options.headers.append("email",email);
+
+    return this.http.post(this.baseurl+"/resetpassword",req,options);
+}
 }

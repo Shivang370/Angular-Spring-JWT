@@ -16,6 +16,7 @@
         </button>
         <div class="dropdown-menu" [ngClass]="menuDisplay?'display':''" aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button" (click)="changepassword()" style="color: royalblue;font-size: 15px;">Change-Password</button>
+            <!-- <div *ngIf="socialAuthServive.authState | async as socialUser"> -->
             <button class="dropdown-item" type="button" (click)="logoutUser()" style="color: royalblue;font-size: 15px;">Logout</button>
             
         </div>

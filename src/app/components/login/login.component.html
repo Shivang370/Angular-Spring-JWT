@@ -1,33 +1,58 @@
-<div class="bootstrap-wrapper">
-    <div class="container mt">
+<div *ngIf="loginFlag" class="bootstrap-wrapper bg">
+    <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="container text-center">
+                <!-- <div class="container text-center">
                     <img class="img-fluid"
                          style="width:100px" 
                          src="/assets/password.png"/>
-                </div>
-            <h1 class="text-center">Login Here</h1>
-                <form [formGroup]="loginform">
+                </div> -->
+            <!-- <h1 class="text-center">Login Here</h1> -->
+                <form [formGroup]="loginform" style="margin-top: 200px;">
                     <div class="form-group">
                         <label>Username</label>
-                        <img src="/assets/user_icon.png"/>
+                        <img class="input-icon" src="/assets/user_icon.png"/>
                         <input type="text" class="form-control" formControlName="username" placeholder="Username" appearance="Outline"/>
                         <span *ngIf="username?.invalid && username?.touched" class="error"> Username is Invalid</span>
                          </div>
                         <br/>
                     <div class="form-group">
                         <label>Password</label>
-                        <img src="/assets/unlock.png"/>
+                        <img class="input-icon" src="/assets/unlock.png"/>
                         <input type="password" class="form-control" id="currpassword" formControlName="password" placeholder="Password" appearance="Outline" pattern="^.*(?=.{8})(?=.*\d)(?=.*[a-zA-Z]).*$"/>
-                        <a class="eye-icon show" (click)="showPassword('current')"><img [src]='showCurrentPassword ? "/assets/hide_password.svg" : "/assets/show_password.svg"' (click)="toggleCurrentPassword()"></a>
+                        <a class="eye-icon" (click)="showPassword('current')"><img [src]='showCurrentPassword ? "/assets/hide_password.svg" : "/assets/show_password.svg"' (click)="toggleCurrentPassword()"></a>
                         <span *ngIf="password?.invalid && password?.touched" class="error"> Password is Invalid </span>
                     </div>
+
+                    <div class="row mt-3">
+                        <div class="col-sm-12 mb-2">
+                          <re-captcha id="recaptcha" [ngModelOptions]="{standalone: true}" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+                          <!-- <div *ngIf="!ischeckedreCAPTCHA() && (recaptcha.dirty ||recaptcha.touched)" class="error">recaptcha expired</div> -->
+                          </div>
+                      </div>
+                      
                     <div class="container text-center mt">
-                    <button (click)="onSubmit()" type="submit" [disabled]="loginform.invalid" class="btn btn-primary">Login</button>
+                    <button  (click)="onSubmit()" type="submit" [disabled]="loginform.invalid" class="btn btn-primary">Login</button>
+                    <button (click)="loginWithGoogle()" mat-raised-button style="margin-left: 10px;" class="google-login-btn">Google </button>
+                    <button  type="submit" class="btn" (click)="forgot()" style="color: royalblue;font-size: 15px; margin-left: 10px; background-color: white; border: none;">Forgot Password ?</button>
                 </div>
                 </form>
            </div>
         </div>
     </div>
+</div>
+
+
+<div *ngIf="otpFlag" class="verify-modal"
+style="position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);min-width: 600px;min-height: 220px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 25px;z-index: 44;display: flex;flex-direction: column;justify-content: space-around;align-items: center;padding-top: 10px;background-color: white;">
+<img class="img-fluid" src="/assets/emailotp.jpeg"/>
+<div style="width: 100%;display: flex;flex-direction: row-reverse;margin: 0;"></div>
+<h1 style="color: crimson;">Enter the OTP send to your Email !!</h1>
+    <ng-otp-input (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" [config]="{length:6}"></ng-otp-input>
+
+<div *ngIf="emptyOtp" class="error">Otp is Required</div>
+
+<div style="margin-top: 15px;" class="primary-btn text-center">
+    <button (click)="submitOtpForm()"  class="btn btn-primary submit">Verify</button>
+</div>
 </div>

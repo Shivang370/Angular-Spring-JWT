@@ -59,7 +59,7 @@ export class ChangePasswordComponent implements OnInit {
         "currentpassword":this.currentpassword?.value,
         "newpassword":this.newpassword?.value
       }
-      this.Userservice.resetpassword(req).subscribe(
+      this.Userservice.changepassword(req).subscribe(
         
         
         (response:any) => {
