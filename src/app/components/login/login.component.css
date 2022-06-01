@@ -47,7 +47,7 @@ input.ng-valid{
 }
 
 .bg {
-    background-image: url("/assets/bglogo.jpeg");
+    background-image: url("assets/bglogo.jpeg");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
